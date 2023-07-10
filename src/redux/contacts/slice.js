@@ -29,9 +29,31 @@ const contactsSlice = createSlice({
     filterContact(state, action) {
       state.filter = action.payload;
     },
+
+    fetchingInProgress(state) {
+      state.isLoading = true;
+    },
+
+    fetchingInSuccess(state, action) {
+      state.contacts.isLoading = false;
+      state.contacts.error = null;
+      state.contacts.items = action.payload;
+    },
+
+    fetchingInError(state, action) {
+      state.contacts.items = [];
+      state.contacts.isLoading = false;
+      state.contacts.error = action.payload;
+    },
   },
 });
 
-export const { addContact, deleteContact, filterContact, filterInputValue } =
-  contactsSlice.actions;
+export const {
+  addContact,
+  deleteContact,
+  filterContact,
+  fetchingInError,
+  fetchingInProgress,
+  fetchingInSuccess,
+} = contactsSlice.actions;
 export const contactsReducer = contactsSlice.reducer;

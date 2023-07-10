@@ -1,14 +1,15 @@
 import { useRef } from 'react';
 import { useSelector } from 'react-redux';
-import { getContactsList } from '../../redux/contacts/selectors';
+import { getContacts } from '../../redux/contacts/selectors';
 import { useDispatch } from 'react-redux';
 import { addContact } from '../../redux/contacts/slice';
 
 import css from './ContactForm.module.css';
 import { nanoid } from 'nanoid';
+import { postContacts } from 'redux/contacts/operations';
 
 const ContactForm = () => {
-  const contactsList = useSelector(getContactsList);
+  const { items, isLoading, error } = useSelector(getContacts);
   const dispatch = useDispatch();
 
   const contactNameRef = useRef();
@@ -18,7 +19,7 @@ const ContactForm = () => {
     event.preventDefault();
     const contactName = contactNameRef.current.value;
     const contactNumber = Number(contactNumberRef.current.value);
-    const isExistingContact = contactsList.find(
+    const isExistingContact = items?.find(
       contact => contact.name.toLowerCase() === contactName.toLowerCase()
     );
     if (isExistingContact) {
@@ -37,7 +38,7 @@ const ContactForm = () => {
       return;
     }
     dispatch(
-      addContact({ name: contactName, number: contactNumber, id: nanoid() })
+      postContacts({ name: contactName, number: contactNumber, id: nanoid() })
     );
     contactNameRef.current.value = '';
     contactNumberRef.current.value = '';
