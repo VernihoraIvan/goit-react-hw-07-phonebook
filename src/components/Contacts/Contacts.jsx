@@ -9,35 +9,23 @@ import { useEffect } from 'react';
 const Contacts = () => {
   const items = useSelector(getContactsList);
   console.log(items);
-  // const filter = useSelector(getFilter);
+  const filter = useSelector(getFilter);
   const dispatch = useDispatch();
   const onDelete = id => {
     dispatch(deleteContact(id));
   };
 
-  // const filteredContactsList = items.filter(contact =>
-  //   contact.name.toLowerCase().includes(filter.toLowerCase())
-  // );
+  const filteredContactsList = items.filter(contact =>
+    contact.name.toLowerCase().includes(filter.toLowerCase())
+  );
 
   // useEffect(() => {
-  //   dispatch(fetchingInProgress);
-  //   const getMovies = async () => {
-  //     try {
-  //       const data = await fetchTrends();
-  //       setMovies(data);
-  //     } catch (error) {
-  //       console.log('error', error);
-  //       setMovies([]);
-  //     } finally {
-  //       setIsLoading(false);
-  //     }
-  //   };
-  //   getMovies();
+
   // }, []);
 
   return (
     <ul className={css.list}>
-      {items?.map(({ id, name, number }) => (
+      {filteredContactsList?.map(({ id, name, number }) => (
         <li key={id} className={css.list_item}>
           {name}: {number}{' '}
           <button

@@ -8,10 +8,10 @@ const FilterInput = () => {
 
   const dispatch = useDispatch();
 
-  // const handleOnChange = () => {
-  //   const input = inputRef.current.value;
-  //   dispatch(filterContact(input));
-  // };
+  const handleOnChange = () => {
+    const input = inputRef.current.value;
+    dispatch(filterContact(input));
+  };
   return (
     <label className={css.label}>
       Find contacts by name:
@@ -20,7 +20,7 @@ const FilterInput = () => {
         ref={inputRef}
         className={css.input}
         type="text"
-        // onChange={handleOnChange}
+        onChange={handleOnChange}
         placeholder="search..."
       />
     </label>
