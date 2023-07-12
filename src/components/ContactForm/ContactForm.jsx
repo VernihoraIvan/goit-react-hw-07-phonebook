@@ -2,11 +2,11 @@ import { useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { getContactsList } from '../../redux/contacts/selectors';
 import { useDispatch } from 'react-redux';
-import { addContact } from '../../redux/contacts/slice';
+// import { addContact } from '../../redux/contacts/slice';
 
 import css from './ContactForm.module.css';
 import { nanoid } from 'nanoid';
-import { postContacts } from 'redux/contacts/operations';
+import { addContact } from 'redux/contacts/operations';
 
 const ContactForm = () => {
   const items = useSelector(getContactsList);
@@ -38,7 +38,7 @@ const ContactForm = () => {
       return;
     }
     dispatch(
-      postContacts({ name: contactName, number: contactNumber, id: nanoid() })
+      addContact({ name: contactName, number: contactNumber, id: nanoid() })
     );
     contactNameRef.current.value = '';
     contactNumberRef.current.value = '';
