@@ -8,8 +8,9 @@ axios.defaults.baseURL = 'https://64aafb9b0c6d844abedf0c7b.mockapi.io';
 export const fetchContacts = () => async dispatch => {
   try {
     dispatch(fetchingInProgress());
-    const response = await axios.get('/contacts');
-    dispatch(fetchingInSuccess(response.data));
+    const { data } = await axios.get('/contacts');
+    dispatch(fetchingInSuccess(data));
+    console.log(data);
   } catch (error) {
     alert(error);
   }
@@ -17,6 +18,7 @@ export const fetchContacts = () => async dispatch => {
 
 export const postContacts = contact => async dispatch => {
   try {
+    dispatch(fetchingInProgress());
     const { data } = await axios.post('/contacts', contact);
     return data;
   } catch (error) {

@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { useSelector } from 'react-redux';
-import { getContacts } from '../../redux/contacts/selectors';
+import { getContactsList } from '../../redux/contacts/selectors';
 import { useDispatch } from 'react-redux';
 import { addContact } from '../../redux/contacts/slice';
 
@@ -9,7 +9,7 @@ import { nanoid } from 'nanoid';
 import { postContacts } from 'redux/contacts/operations';
 
 const ContactForm = () => {
-  const { items, isLoading, error } = useSelector(getContacts);
+  const items = useSelector(getContactsList);
   const dispatch = useDispatch();
 
   const contactNameRef = useRef();

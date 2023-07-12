@@ -14,7 +14,7 @@ const contactsSlice = createSlice({
   initialState,
   reducers: {
     setContacts(state, action) {
-      state.contacts = action.payload;
+      state.contacts.items = action.payload;
     },
     addContact(state, action) {
       state.contacts.items.push(action.payload);
@@ -31,13 +31,14 @@ const contactsSlice = createSlice({
     },
 
     fetchingInProgress(state) {
-      state.isLoading = true;
+      state.contacts.isLoading = true;
     },
 
     fetchingInSuccess(state, action) {
       state.contacts.isLoading = false;
       state.contacts.error = null;
       state.contacts.items = action.payload;
+      console.log(action.payload);
     },
 
     fetchingInError(state, action) {
