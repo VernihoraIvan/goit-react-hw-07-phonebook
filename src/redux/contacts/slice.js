@@ -7,18 +7,18 @@ const initialState = {
     isLoading: false,
     error: null,
   },
-  filter: '',
+  // filter: '',
 };
 
 const contactsSlice = createSlice({
   name: 'contacts',
   initialState,
 
-  reducers: {
-    filterContact(state, action) {
-      state.filter = action.payload;
-    },
-  },
+  // reducers: {
+  //   filterContact(state, action) {
+  //     state.filter = action.payload;
+  //   },
+  // },
   extraReducers: {
     [fetchContacts.pending](state) {
       state.contacts.isLoading = true;
@@ -56,5 +56,5 @@ const contactsSlice = createSlice({
   },
 });
 
-export const { filterContact } = contactsSlice.actions;
+// export const { filterContact } = contactsSlice.actions;
 export const contactsReducer = contactsSlice.reducer;
